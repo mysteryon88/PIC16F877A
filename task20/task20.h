@@ -2,6 +2,7 @@
 #define TASK20_H
 
 #include "LCD.h"
+
 #define RIGHT "    RIGHT BUTTON "
 #define LEFT " LEFT BUTTON     "
 #define AVEREGE "    AVEREGE      "
