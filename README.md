@@ -2,9 +2,9 @@
 
 Made in MPLAB IDE v8.90, XC8 Compiler
 
-In general files for working with LCD and for interacting with the peripherals of the board
+In general there are files for working with LCD and for interacting with the peripherals of the board
 
-The rest is on task in main.c
+The rest of the task is in main.с
 
 kurs_pic.DSN - circuit board (ISIS Professional (Proteus 7))
 
