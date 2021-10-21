@@ -23,12 +23,12 @@ void start(void){
 void Beep(void){ 
 	byte tmp_TRISB=TRISB, tmp_PORTB=PORTB, i;
 	TRISB3=0; // clrbit (TRISB,3);
-	i=100000; 
+	i=1000000; 
 	while(i--){
  		RB3=1;
-		Delay(100); //0,125 мс
+		Delay(140); //0,125 мс
  		RB3=0;
-		Delay(100);
+		Delay(140);
 	}
  	PORTB=tmp_PORTB;
  	TRISB=tmp_TRISB;
@@ -61,9 +61,10 @@ void task(void){
 		for (i = 0; i < N; i++){
 			(numbers[i] % 2) ? odd[i] = numbers[i] : ++count_even;
 			show(odd[i], i, 1);
-		}
+		}	
+		short p = 10;
+		if(count_even == 8) while(p--) Beep(); 
 		do {
-			if(count_even == 8) Beep();
 			PORTB |= 0xF0;
 			if (!(PORTB & (1 << 7))) break;	
 		} while (1);
