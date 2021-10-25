@@ -20,8 +20,6 @@
 #define DIP_40
 #define SCL 3
 #define SDA 4
-//#define ClockValue 1 
-//#define	SET_HIGH_SPEED_I2C SSPADD=ClockValue
 #define cache_size_I2C 0x40 // 0b01000000
 
 #define testbit(var, bit) ((var) & (1 <<(bit)))
@@ -56,8 +54,6 @@ void OUT_BYTE_PAGE_I2C(byte);
 void savestr(char * mySTRING);
 void loadstr(char * mySTRING);
 //-------------
-
-//char syms[11]= {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ' '};
 
 //для LCD
 byte Current_ind = 0;
