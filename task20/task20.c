@@ -51,13 +51,12 @@ void task(void){
 		}
 		decision = 0x00;
 
-		time = TMR0 + TMR0_count * 256;//для рандома
-		
-		//вывести на экран число 
+		time = TMR0 + TMR0_count * 256;// rand
+
 		time_double = time/(float)IN_TO_SEC;
 		
-		sum += time_double; //складываем время
-		sprintf(num, "%f", sum / count_sum);
+		sum += time_double; //
+		sprintf(num, "%.3f", sum / count_sum); //output 
 
 		Set_Coord_LCD(1, 2);
  	    Show_String_LCD(num);

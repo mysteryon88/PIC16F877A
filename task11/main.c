@@ -12,7 +12,7 @@ void main(){
 	Init_I2C();
     Init_LCD();
     Clr_LCD();
-//	start();
-	task();
+	start();
+//	task();
 	return;	
 }
