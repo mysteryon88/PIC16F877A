@@ -1,8 +1,8 @@
 #include "task29.h"
 
-void start(void){
+void start(void){	
+	Clr_LCD();
 	byte decision = 0x00;
-	/*
 	if (eeprom_decision()) {//вывод из eeprom или само задание
 		char str_to_lcd[32] = " ";
 		loadstr(str_to_lcd);
@@ -12,10 +12,8 @@ void start(void){
 			PORTB |= 0xF0;
 			if (!(PORTB & (1 << 7))) decision = 1;
 		} while (!decision);
-		task();
 	}
-	else task();
-	*/
+    Clr_LCD();
 	task();
 }
 
@@ -42,6 +40,7 @@ void task(void){
 	byte decision = 0x00;
 	short i = 0;
 	while (1){
+		show(numbers[0], 0, 0);
 		decision = 0x00;
 		for (i = 0; i < N; i++ ){
 			do {
@@ -67,6 +66,12 @@ void task(void){
 		do {
 			PORTB |= 0xF0;
 			if (!(PORTB & (1 << 7))) break;	
+			PORTB |= 0xF0;
+			if (!(PORTB & (1 << 6))) {
+				save(numbers, odd);
+				Clr_LCD();
+				Show_String_LCD(SAVE);
+			}
 		} while (1);
 		Clr_LCD();
 		for(i = 0; i < N; i++) numbers[i] = 0;
@@ -79,4 +84,15 @@ void show(short num, short i, short j){
 	sprintf(num_lcd, "%d", num); 
 	Set_Coord_LCD(j, 2*i);
 	Show_String_LCD(num_lcd);
+}
+
+void save(short *num, short *odd){
+	char to_eeprom[32] = " ";
+	memset(to_eeprom, ' ', 32);
+	short i;
+	for(i = 0; i < 8; i++){
+		to_eeprom[i*2] = 48 + num[i];
+		to_eeprom[i*2+16] = 48 + odd[i];
+	}
+	savestr(to_eeprom);
 }
