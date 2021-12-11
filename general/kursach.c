@@ -26,9 +26,8 @@ byte eeprom_decision(void) {
                 answer = 1;
                 decision = 1;
             }
-            if (!(PORTB & (1 << 5))) {
-                decision = 1;
-            }
+            if (!(PORTB & (1 << 5))) decision = 1;
+
         }
     } while (!decision);
     return answer;

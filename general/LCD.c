@@ -20,18 +20,20 @@ void Send_Command_LCD(byte tmp) {
 }
 
 void Init_LCD(void) {
-    Delay(1000);
-    TRISB = 0;
-    PORTB = 0x30;
-    Pulse(300);
-    PORTB = 0x20;
-    Pulse(100);
-    Send_Command_LCD(0x28);
-    Send_Command_LCD(0x0D); 
-    Send_Command_LCD(0x06);
-    Send_Command_LCD(0x02);
-    Current_ind = 0;
-    PORTB = 0xF0;
+  	Delay(200*20);
+    TRISB=0;   
+    PORTB=0x30;   //0011000
+    Pulse(20*20);
+    Pulse(20*20);
+    Pulse(20*20);
+ 
+    PORTB=0x20;  
+    Pulse(20*20);
+ 
+    Send_Command_LCD  (0x28);
+    Send_Command_LCD  (0x0E);
+    Send_Command_LCD  (0x06);
+    Send_Command_LCD  (0x02);
 }
 
 void Set_Coord_LCD(byte i, byte j) {
@@ -64,11 +66,8 @@ void Show_String_LCD(const char * mySTRING) {
 }
 
 void Clr_LCD(void) {
-	Send_Command_LCD(0x01);//команда отчистки дисплея
-	/*
-    for (byte i = 0; i < 32; i++) {
-        Set_Coord_LCD(i / 16, i % 16);
-        Send_Byte_LCD(' ');
-    }
-	*/
+	Set_Coord_LCD(0,0);
+    Show_String_LCD("                ");
+	Show_String_LCD("                ");
+    Set_Coord_LCD(0,0);
 }

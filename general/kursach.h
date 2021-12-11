@@ -22,7 +22,7 @@
 #define SDA 4
 #define cache_size_I2C 0x40 // 0b01000000
 
-#define testbit(var, bit) ((var) & (1 <<(bit)))
+#define testbit(var, bit) ((var) & (1 <<(bit)))  
 #define setbit(var, bit) ((var) |= (1 << (bit)))
 #define clrbit(var, bit) ((var) &= ~(1 << (bit)))
 
