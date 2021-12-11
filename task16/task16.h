@@ -16,4 +16,5 @@ void task(void);  //задание
 byte mass_cmp(short* num_one, short* num_two, short count_one, short count_two);
 void make_string(char* str_to_eeprom, char* str_one, char* str_two);
 void init(short* num_one, short* num_two, char* str_one, char* str_two); 
+void Beep(void);
 #endif

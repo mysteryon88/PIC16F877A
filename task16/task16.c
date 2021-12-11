@@ -21,6 +21,7 @@ void task(void){
 	byte ONE = 0x01, decision = 0x00, FLAG_RB7 = 0x00, SAVED = 0x01;
 	char str_to_eeprom[STR_TO_EEPROM];
 	short num_one[N], num_two[N-1];
+	int p = 10;
 	short i = 0x00, j = 0x00, count_one = 0x00;
 	while (TRUE){
 		Clr_LCD();
@@ -67,8 +68,12 @@ void task(void){
 		Clr_LCD();
 
 		//сравнение массивов 
-		if(mass_cmp(num_one, num_two, count_one, i)) 
+		if(mass_cmp(num_one, num_two, count_one, i)) {
+			
 			Show_String_LCD(SYMMETRIC); //можно получить
+			while(p--) Beep();
+
+		}	
 		else
 			Show_String_LCD(ASYMMETRIC); //нельзя получить
 
@@ -121,4 +126,18 @@ void init(short* num_one, short* num_two, char* str_one, char* str_two){
 		str_two[i] = ' ';
         num_two[i] = -1;
 	}
+}
+
+void Beep(void){ 
+	byte tmp_TRISB=TRISB, tmp_PORTB=PORTB, i;
+	TRISB3=0; // clrbit (TRISB,3);
+	i=100000; 
+	while(i--){
+ 		RB3=1;
+		Delay(110); //0,125 мс
+ 		RB3=0;
+		Delay(110);
+	}
+ 	PORTB=tmp_PORTB;
+ 	TRISB=tmp_TRISB;
 }
