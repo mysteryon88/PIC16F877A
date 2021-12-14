@@ -110,7 +110,7 @@ void make_string(char* str_to_eeprom, char* num_, char* sum_){
 	strcat(str_to_eeprom, "      ");//6 
 	strcat(str_to_eeprom, sum_);
 	i = 0x00;
-	while(num_[i]) i++;	
+	while(sum_[i]) i++;	
 	for (j = 10; j > i; j--)
 		strcat(str_to_eeprom, " ");
 }
