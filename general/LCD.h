@@ -1,3 +1,6 @@
+/*
+The library for LCD was written by my teacher Sergey Ivanovich Kovalev, who died in 2021
+*/
 #ifndef LCD_H
 #define LCD_H
 

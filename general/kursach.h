@@ -1,3 +1,6 @@
+/*
+The library for I2C was written by my teacher Sergey Ivanovich Kovalev, who died in 2021
+*/
 #ifndef KURSACH_H
 #define KURSACH_H
 

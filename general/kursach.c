@@ -1,12 +1,15 @@
+/*
+The library for I2C was written by my teacher Sergey Ivanovich Kovalev, who died in 2021
+*/
 #include "LCD.h"
 
 #define EEPROM "Use EEPROM?     B1 YES     B2 NO"
-//задержка
-void Delay(unsigned short tmp){ // (tmp=1000) ~  3 mS
+
+void Delay(unsigned short tmp){
     while(tmp--);
 	return;
 }
-//проверка кнопки
+
 byte Check_buttons(void){
     byte tmp, tmp_PORTB = PORTB, tmp_TRISB = TRISB;
     TRISB &= 0x0F;
@@ -15,8 +18,7 @@ byte Check_buttons(void){
     PORTB = tmp_PORTB;
     TRISB = tmp_TRISB;
     return (tmp >> 4);
-}//меню выбора памяти 
-byte eeprom_decision(void) {
+}byte eeprom_decision(void) {
     byte decision = 0, answer = 0;
     Show_String_LCD(EEPROM);
     do {
@@ -41,23 +43,23 @@ void Init_I2C() {
     TRISC3 = 0;
     TRISC4 = 0;
 }
-//ставим низкий уровень на SCL
+
 void LOW_SCL_I2C(void) {
     clrbit(PORTC, SCL);
     Delay(5);
 }
-//ставим высокий уровень на SCL
+
 void HIGH_SCL_I2C(void) {
     setbit(PORTC, SCL);
     Delay(5);
 }
-//ставим низкий уровень на SDA
+
 void LOW_SDA_I2C(void) {
     clrbit(PORTC, SDA);
     clrbit(TRISC, SDA);
     Delay(5);
 }
-//ставим высокий уровень на SDA
+
 void HIGH_SDA_I2C(void) {
     setbit(TRISC, SDA);
     Delay(5);
@@ -77,14 +79,14 @@ void NACK_I2C(void) {
     HIGH_SDA_I2C();
     CLOCK_PULSE_I2C();
 }
-//старт - формирование отрицательного фронта на шине SDA, а затем на шине SCL
+//formation of a negative edge on the SDA bus, and then on the SCL bus
 void START_I2C(void) {
     HIGH_SDA_I2C();
     HIGH_SCL_I2C();
     LOW_SDA_I2C();
     LOW_SCL_I2C();
 }
-//стоп - формирование положительного фронта на SCL, а затем на шине SDA
+//formation of a positive edge on SCL, and then on the SDA bus
 void STOP_I2C(void) {
     LOW_SDA_I2C();
     LOW_SCL_I2C();
@@ -183,7 +185,7 @@ void OUT_BYTE_PAGE_I2C(byte tmp) {
 }
 
 //---------------------------
-//сохранение в eeprom
+//saving to eeprom
 void savestr(char * mySTRING) {
     Init_WRITE_I2C(0);
 	
@@ -191,7 +193,7 @@ void savestr(char * mySTRING) {
  
     STOP_I2C();
 }
-//чтение из eeprom
+//reading from eeprom
 void loadstr(char * mySTRING) {
     Init_READ_I2C(0);
 	
