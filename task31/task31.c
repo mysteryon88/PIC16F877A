@@ -55,7 +55,8 @@ void task(void){
 			PORTB |= 0xF0;
 			if (!(PORTB & (1 << 4))){ //нажали на RB4 значит делаем +1
 				if(ONE){ //какое число вводится
-					num_one[i]++;
+					num_one[i]++; 
+					
 					(num_one[i] < 10) ? str_one[i] = 48 + num_one[i] : num_one[i] = -1; //overflow
 					Set_Coord_LCD(0, 0);
 					Show_String_LCD(str_one);//выводим
@@ -110,7 +111,7 @@ void task(void){
 
 		i = 0x00;
 
-		while(result_str[i]) i++;
+		while(result_str[i]) i++;  
 	
 		result_str[i] = '.';
 		res -= res_int; //выделили дробную часть
@@ -119,7 +120,7 @@ void task(void){
 			res*=10;
 			res_int = res; //выделили целую часть
 			res-=res_int; //оставили дробную часть
-			result_str[i++] = 48 + res_int; 	
+			result_str[i++] = 48 + res_int; 
 		}		
 		
 
@@ -134,8 +135,8 @@ void task(void){
 			PORTB |= 0xF0;
 			//автосохранение
 			if (!(PORTB & (1 << 7))){
-				strcpy(str_eeprom, str_one);  //6
-				strcat(str_eeprom, "    ");   //4
+				strcpy(str_eeprom, str_one);  //6  
+				strcat(str_eeprom, "    ");   //4 
 				strcat(str_eeprom, str_two);
 				i = 0x00;
 				while(str_two[i]) i++;	

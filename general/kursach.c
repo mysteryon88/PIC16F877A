@@ -12,9 +12,9 @@ void Delay(unsigned short tmp){
 
 byte Check_buttons(void){
     byte tmp, tmp_PORTB = PORTB, tmp_TRISB = TRISB;
-    TRISB &= 0x0F;
-    PORTB |= 0xF0;
-    tmp = PORTB^0xFF;
+    TRISB &= 0x0F; 
+    PORTB |= 0xF0;  
+    tmp = PORTB^0xFF;  
     PORTB = tmp_PORTB;
     TRISB = tmp_TRISB;
     return (tmp >> 4);

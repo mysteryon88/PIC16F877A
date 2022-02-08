@@ -51,7 +51,7 @@ void Set_Coord_LCD(byte i, byte j) {
 }
 
 void Send_Byte_LCD(byte tmp) {
-    while (Check_buttons())
+    while (Check_buttons()) 
     	Delay(1000);
     PORTB = (PORTB & 0x0F)+ (tmp & 0xF0);
     Pulse(10);
