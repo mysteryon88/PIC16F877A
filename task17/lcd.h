@@ -2,7 +2,7 @@
 Author: unknown
 */
 #ifndef _LCD_H_
-#define	_LCD_H_
+#define _LCD_H_
 
 #include "stack.h"
 #include <pic16f877a.h>
@@ -13,7 +13,6 @@ Author: unknown
 #define TRIS_LCD TRISB
 #define RS RB1
 #define E RB2
-
 
 //Длина одной строки экрана
 #define _LENGTH_STING_ 16
@@ -30,47 +29,51 @@ Author: unknown
 byte CURRENT_POS;
 
 //Запоминание в стэк порта к которому подключен экран
-#define push_LCD() {                                \
-    push_stack(TRIS_LCD);                           \
-    push_stack(PORT_LCD);                           \
-}
+#define push_LCD()            \
+    {                         \
+        push_stack(TRIS_LCD); \
+        push_stack(PORT_LCD); \
+    }
 //Вытаскивание из стэка порта к которому подключен экран
-#define pop_LCD() {                                 \
-    pop_stack(PORT_LCD);                            \
-    pop_stack(TRIS_LCD);                            \
-}
+#define pop_LCD()            \
+    {                        \
+        pop_stack(PORT_LCD); \
+        pop_stack(TRIS_LCD); \
+    }
 //Пульс на ножку E
-#define pulse_E() {                                 \
-    E = 1;                                          \
-    __delay_us(DELAY_5us);                          \
-    E = 0;                                          \
-    __delay_us(DELAY_5us);                          \
-}
+#define pulse_E()              \
+    {                          \
+        E = 1;                 \
+        __delay_us(DELAY_5us); \
+        E = 0;                 \
+        __delay_us(DELAY_5us); \
+    }
 //Отправка  данных на экран (команда/данные, само значение)
-#define SEND_LCD(mode, num) {                               \
+#define SEND_LCD(mode, num)                                 \
+    {                                                       \
                                                             \
-    PORT_LCD = 0;                                           \
-    TRIS_LCD = 0;                                           \
+        PORT_LCD = 0;                                       \
+        TRIS_LCD = 0;                                       \
                                                             \
-    RS = (mode);                                            \
-    E = 0;                                                  \
+        RS = (mode);                                        \
+        E = 0;                                              \
                                                             \
-    do {                                                    \
+        do                                                  \
+        {                                                   \
                                                             \
-        while(check_buttons())                              \
+            while (check_buttons())                         \
+                __delay_ms(DELAY_5ms);                      \
+                                                            \
             __delay_ms(DELAY_5ms);                          \
                                                             \
-        __delay_ms(DELAY_5ms);                              \
+        } while (check_buttons());                          \
                                                             \
-    } while(check_buttons());                               \
+        PORT_LCD = (PORT_LCD & 0x0F) + ((num)&0xF0);        \
+        pulse_E();                                          \
                                                             \
-    PORT_LCD = (PORT_LCD & 0x0F) + ((num) & 0xF0);          \
-    pulse_E();                                              \
-                                                            \
-    PORT_LCD = (PORT_LCD & 0x0F) + ((num) << 4 & 0xF0);     \
-    pulse_E();                                              \
-                                                            \
-}
+        PORT_LCD = (PORT_LCD & 0x0F) + ((num) << 4 & 0xF0); \
+        pulse_E();                                          \
+    }
 
 //Отправка команды на экран (например отчистить экран)
 void send_command_LCD(byte num);
@@ -84,6 +87,5 @@ void show_string_LCD(const char *str);
 void set_coord_LCD(byte i, byte j);
 //Проверка нажаты ли сейчас кнопки
 byte check_buttons(void);
-
 
 #endif

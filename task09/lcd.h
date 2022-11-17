@@ -2,12 +2,11 @@
 Author: unknown
 */
 #ifndef _LCD_H_
-#define	_LCD_H_
+#define _LCD_H_
 
 #include "stack.h"
 #include <pic16f877a.h>
 #include <xc.h>
-
 
 #define PORT_LCD PORTB
 #define TRIS_LCD TRISB
@@ -25,52 +24,55 @@ Author: unknown
 
 byte CURRENT_POS;
 
-#define push_LCD() {                                \
-    push_stack(TRIS_LCD);                           \
-    push_stack(PORT_LCD);                           \
-}
-#define pop_LCD() {                                 \
-    pop_stack(&PORT_LCD);                           \
-    pop_stack(&TRIS_LCD);                           \
-}
+#define push_LCD()            \
+    {                         \
+        push_stack(TRIS_LCD); \
+        push_stack(PORT_LCD); \
+    }
+#define pop_LCD()             \
+    {                         \
+        pop_stack(&PORT_LCD); \
+        pop_stack(&TRIS_LCD); \
+    }
 
-#define pulse_E() {                                 \
-    E = 1;                                          \
-    __delay_us(DELAY_5us);                          \
-    E = 0;                                          \
-    __delay_us(DELAY_5us);                          \
-}
+#define pulse_E()              \
+    {                          \
+        E = 1;                 \
+        __delay_us(DELAY_5us); \
+        E = 0;                 \
+        __delay_us(DELAY_5us); \
+    }
 
-#define SEND_LCD(mode, num) {                               \
+#define SEND_LCD(mode, num)                                 \
+    {                                                       \
                                                             \
-    PORT_LCD = 0;                                           \
-    TRIS_LCD = 0;                                           \
+        PORT_LCD = 0;                                       \
+        TRIS_LCD = 0;                                       \
                                                             \
-    RS = (mode);                                            \
-    E = 0;                                                  \
+        RS = (mode);                                        \
+        E = 0;                                              \
                                                             \
-    do {                                                    \
+        do                                                  \
+        {                                                   \
                                                             \
-        while(check_buttons())                              \
+            while (check_buttons())                         \
+                __delay_ms(DELAY_5ms);                      \
+                                                            \
             __delay_ms(DELAY_5ms);                          \
                                                             \
-        __delay_ms(DELAY_5ms);                              \
+            while (check_buttons())                         \
+                __delay_ms(DELAY_5ms);                      \
                                                             \
-        while(check_buttons())                              \
             __delay_ms(DELAY_5ms);                          \
                                                             \
-        __delay_ms(DELAY_5ms);                              \
+        } while (check_buttons());                          \
                                                             \
-    } while(check_buttons());                               \
+        PORT_LCD = (PORT_LCD & 0x0F) + ((num)&0xF0);        \
+        pulse_E();                                          \
                                                             \
-    PORT_LCD = (PORT_LCD & 0x0F) + ((num) & 0xF0);          \
-    pulse_E();                                              \
-                                                            \
-    PORT_LCD = (PORT_LCD & 0x0F) + ((num) << 4 & 0xF0);     \
-    pulse_E();                                              \
-                                                            \
-}
-
+        PORT_LCD = (PORT_LCD & 0x0F) + ((num) << 4 & 0xF0); \
+        pulse_E();                                          \
+    }
 
 void send_command_LCD(byte num);
 void send_byte_LCD(byte num);
@@ -78,6 +80,5 @@ void init_LCD(void);
 void show_string_LCD(const char *str);
 void set_coord_LCD(byte i, byte j);
 byte check_buttons(void);
-
 
 #endif
