@@ -10,7 +10,7 @@ void Pulse(unsigned short x);
 void Init_LCD(void);
 void Set_Coord_LCD(byte i, byte j);
 void Send_Byte_LCD(byte tmp);
-void Show_String_LCD(const char * mySTRING);
+void Show_String_LCD(const char *mySTRING);
 void Clr_LCD(void);
 
 #endif

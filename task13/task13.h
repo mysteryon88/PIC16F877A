@@ -3,8 +3,8 @@
 
 #include "LCD.h"
 
-void start(void);//начало
-void task(void);//задание
+void start(void); //пїЅпїЅпїЅпїЅпїЅпїЅ
+void task(void);  //пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 void Beep(void);
 void Show_LCD(short num, char *num_);
 

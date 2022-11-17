@@ -3,10 +3,10 @@
 
 #include "LCD.h"
 
-void start(void);//начало
-void task(void);//задание
+void start(void); //пїЅпїЅпїЅпїЅпїЅпїЅ
+void task(void);  //пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-char str1[16] = "Hello, world";//12
+char str1[16] = "Hello, world"; // 12
 char str2[16];
 
 #endif

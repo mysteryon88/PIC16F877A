@@ -3,8 +3,8 @@
 
 #include "LCD.h"
 
-void start(void);//начало
-void task(void);//задание
+void start(void); //пїЅпїЅпїЅпїЅпїЅпїЅ
+void task(void);  //пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 void Beep(void);
 unsigned long int mas_to_int(short *mas, size_t size);
 unsigned long int power(u_int num, short ex);

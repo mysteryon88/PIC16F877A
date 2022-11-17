@@ -5,14 +5,14 @@
 
 #define TRUE 1
 
-#define ASCENDING "   ASCENDING    " 
+#define ASCENDING "   ASCENDING    "
 #define DESCENDING "   DESCENDING   "
 #define NOT_ORDERED "  NOT ORDERED   "
 #define SAVE "     SAVED"
 #define N 7
 
-void start(void);//начало
-void task(void);//задание
+void start(void); //пїЅпїЅпїЅпїЅпїЅпїЅ
+void task(void);  //пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 void Beep(void);
 void Overflow(void);
 #endif

@@ -7,11 +7,11 @@
 #define N 11
 #define SAVE "     SAVED"
 
-void start(void);//начало
-void task(void);//задание
+void start(void); //пїЅпїЅпїЅпїЅпїЅпїЅ
+void task(void);  //пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 void Beep(void);
 void Show_LCD(short num);
-void swap(char* a, char* b);
-void reverse(char* first, char* last);
-void make_string(char* str_to_eeprom, char* num_, char* ternary);
+void swap(char *a, char *b);
+void reverse(char *first, char *last);
+void make_string(char *str_to_eeprom, char *num_, char *ternary);
 #endif

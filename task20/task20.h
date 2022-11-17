@@ -9,11 +9,11 @@
 
 #define IN_TO_SEC 19600
 
-//кол-во переполнений tmr0
+//пїЅпїЅпїЅ-пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ tmr0
 unsigned long TMR0_count = 0;
 
-void interrupt timer0(void); //переполнение tmr0
-void start(void);//начало
-void task(void);//задание
+void interrupt timer0(void); //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ tmr0
+void start(void);            //пїЅпїЅпїЅпїЅпїЅпїЅ
+void task(void);             //пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 #endif
